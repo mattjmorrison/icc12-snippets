@@ -1,0 +1,137 @@
+snippet g1 "Create Gruntfile.coffee"
+module.exports = (grunt) ->
+  grunt.initConfig = require('load-grunt-config')(grunt)
+endsnippet
+
+snippet test_task "Create test.coffee"
+module.exports = (grunt) ->
+
+  grunt.task.registerTask 'test', [
+    'coffee'
+    'karma'
+  ]
+endsnippet
+
+snippet testhelper "Create helpler.coffee"
+document.write '
+<div id="ember-app"></div>
+<div id="ember-testing-container">
+    <div id="ember-testing"></div>
+</div>'
+Ember.testing = true
+App.rootElement = '#ember-testing'
+App.setupForTesting()
+App.injectTestHelpers()
+endsnippet
+
+snippet test1 "Create First Test"
+test "First test", ->
+  Ember.run App, 'advanceReadiness'
+
+  visit('/').then ->
+   heading = find('#heading').text()
+   ok 'Hello World' == heading, "#{heading} was not 'Hello World'"
+endsnippet
+
+snippet gh "Create emberhandlebars.coffee"
+module.exports =
+  compile:
+    options:
+      templateName: (sourceFile) ->
+        newSource = sourceFile.replace('src/templates/', '')
+        newSource.replace('.handlebars', '')
+    files: [
+      'src/templates/*.handlebars'
+    ]
+    dest: 'build/app/tmpl.js'
+endsnippet
+
+snippet lint "create coffeelint.coffee"
+module.exports =
+  app: ['src/*.coffee', 'tests/*.coffee']
+endsnippet
+
+snippet coffee "Create coffeescript.coffee"
+module.exports =
+  options:
+    bare: true
+  compile:
+    files:
+      'build/app/app.js': [
+        'src/*.coffee'
+      ]
+      'build/tests/tests.js': [
+        'tests/*tests.coffee'
+      ]
+endsnippet
+
+snippet concat "Create concat.coffee"
+module.exports =
+  deps:
+    src: [
+      'bower_components/jquery/jquery.min.js'
+      'bower_components/handlebars/handlebars.js'
+      'bower_components/ember/ember.js'
+    ]
+    dest: 'build/deps.js'
+endsnippet
+
+snippet coverage "Create coveralls.coffee"
+module.exports =
+  options:
+    coverage_dir: 'coverage'
+endsnippet
+
+snippet karma_coverage "karma.coffee: Add coverage"
+reporters: ['progress', 'coverage']
+preprocessors:
+  "build/app/*.js": "coverage"
+coverageReporter:
+  type: "lcov"
+  dir: 'coverage/'
+plugins: [
+  'karma-qunit'
+  'karma-coverage'
+  'karma-phantomjs-launcher'
+]
+endsnippet
+
+snippet recess "Create recess.coffee"
+module.exports =
+  options:
+    compile: true
+  bootstrap:
+    src: [
+      'bower_components/bootstrap/less/bootstrap.less'
+    ]
+    dest: 'build/css/bootstrap.css'
+endsnippet
+
+snippet watch "Create watch.coffee"
+module.exports =
+  coffee:
+    files: 'src/*.coffee'
+    tasks: ['coffee']
+  handlebars:
+    files: 'src/templates/*.handlebars'
+    tasks: ['emberhandlebars']
+  less:
+    files: 'bower_components/bootstrap/less*.less'
+    tasks: ['recess']
+endsnippet
+
+snippet uglify "Create uglify.coffee"
+module.exports =
+  prod:
+    src: [
+      'build/deps.js'
+      'build/app/app.js'
+      'build/app/tmpl.js'
+    ]
+    dest: 'build/prod/app.min.js'
+endsnippet
+
+snippet test "Create qunit test"
+test "$1", ->
+  $2
+endsnippet

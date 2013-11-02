@@ -1,0 +1,102 @@
+snippet p1 "Create package.json"
+{
+    "name": "icc12",
+    "dependencies": {
+        "load-grunt-config": "*",
+        "grunt-cli": "*",
+        "grunt-karma": "*",
+        "karma-qunit": "*",
+        "karma-phantomjs-launcher": "*"
+    }
+}
+endsnippet
+
+snippet b1 "Create bower.json"
+{
+    "name": "icc",
+    "dependencies": {
+        "ember": "1.0.0"
+    }
+}
+endsnippet
+
+snippet bower "package.json: Add bower"
+"bower": "*"
+endsnippet
+
+snippet bootstrap "bower.json: Add bootstrap"
+"bootstrap": "*"
+endsnippet
+
+snippet bower_post_install "package.json: Add postinstall"
+"scripts": {
+	"postinstall": "bower install"
+}
+endsnippet
+
+snippet coffee "package.json: Add coffee"
+"grunt-contrib-coffee": "*"
+endsnippet
+
+snippet ember "package.json: Add emberhandlebars"
+"grunt-ember-template-compiler": "*"
+endsnippet
+
+snippet lint "package.json: Add coffeelint"
+"grunt-coffeelint": "*"
+endsnippet
+
+snippet concat "package.json: Add concat"
+"grunt-contrib-concat": "*"
+endsnippet
+
+snippet uglify "package.json: Add uglify"
+"grunt-contrib-uglify": "*"
+endsnippet
+
+snippet watch "package.json: Add watch"
+"grunt-contrib-watch": "*"
+endsnippet
+
+snippet coverage "package.json: Add coverage"
+"karma-coverage": "*",
+"grunt-karma-coveralls": "*"
+endsnippet
+
+snippet recess "package.json: Add recess"
+"grunt-recess": "*"
+endsnippet
+
+snippet npm_test "package.json: Add test"
+"test": "grunt test"
+endsnippet
+
+snippet g1 "Create Gruntfile.js"
+module.exports = function(grunt){
+  grunt.initConfig = require('load-grunt-config')(grunt);
+};
+endsnippet
+
+snippet k1 "Create karma.js"
+module.exports = {
+    unit: {
+        options: {
+            basePath: '.',
+            frameworks: ['qunit'],
+            colors: true,
+            singleRun: true,
+            autoWatch: false,
+            reporters: ['progress'],
+            browsers: ['PhantomJS'],
+            files: [
+            ]
+        }
+    }
+};
+endsnippet
+
+snippet test "Create qunit test" b
+test("${1}", function(){
+    $2
+});
+endsnippet
